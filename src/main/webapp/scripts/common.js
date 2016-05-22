@@ -14,11 +14,3 @@ requirejs.config({
     },
     shim: {}
 });
-
-// Start the main app logic.
-require(['jquery', 'backbone', 'underscore', 'ListView'],
-    function   ($, Backbone, _, ListView) {
-
-        ListView.create();
-    }
-);

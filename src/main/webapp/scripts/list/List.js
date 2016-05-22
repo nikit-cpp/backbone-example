@@ -1,4 +1,4 @@
-define('List', ['jquery', 'backbone', 'underscore', 'Item'],
+define('list/List', ['jquery', 'backbone', 'underscore', 'list/Item'],
     function   ($, Backbone, _, Item) {
         var List = Backbone.Collection.extend({
             /*url: function() {

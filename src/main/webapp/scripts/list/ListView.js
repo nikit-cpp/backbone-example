@@ -1,5 +1,5 @@
-define('ListView',
-    ['jquery', 'backbone', 'underscore', 'Item', 'List', 'ItemView', 'text!ListView.html'],
+define('list/ListView',
+    ['jquery', 'backbone', 'underscore', 'list/Item', 'list/List', 'list/ItemView', 'text!list/ListView.html'],
 function($, Backbone, _, Item, List, ItemView, ListViewHtml){
         var ListView = Backbone.View.extend({
             template: _.template(ListViewHtml),

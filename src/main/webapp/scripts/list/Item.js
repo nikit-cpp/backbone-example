@@ -1,4 +1,4 @@
-define('Item', ['jquery', 'backbone', 'underscore'],
+define('list/Item', ['jquery', 'backbone', 'underscore'],
     function   ($, Backbone, _) {
         //jQuery, canvas and the app/sub module are all
         //loaded and can be used here now.

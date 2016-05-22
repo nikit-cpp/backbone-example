@@ -1,4 +1,4 @@
-define('ItemView', ['jquery', 'backbone', 'underscore', 'text!ItemView.html'],
+define('list/ItemView', ['jquery', 'backbone', 'underscore', 'text!list/ItemView.html'],
     function   ($, Backbone, _, ItemViewHtml) {
 
         var ItemView = Backbone.View.extend({
