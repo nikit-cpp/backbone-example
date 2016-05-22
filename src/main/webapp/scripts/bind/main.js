@@ -1,19 +1,57 @@
 requirejs(['../common'], function (common) {
-    require(['jquery', 'backbone', 'underscore', 'epoxy'],
+    require(['jquery', 'backbone', 'underscore', 'epoxy', 'validation'],
         function   ($, Backbone, _) {
-            var bindModel = new Backbone.Model({
-                firstName: "Luke",
-                lastName: "Skywalker"
+            Backbone.Validation.configure({
+                forceUpdate: true
             });
+
+            _.extend(Backbone.Validation.callbacks, {
+                valid: function (view, attr, selector) {
+                    var $el = view.$('[name=' + attr + ']'),
+                        $group = $el.closest('.form-group');
+
+                    $group.removeClass('has-error');
+                    $group.find('.help-block').html('').addClass('hidden');
+                },
+                invalid: function (view, attr, error, selector) {
+                    var $el = view.$('[name=' + attr + ']'),
+                        $group = $el.closest('.form-group');
+
+                    $group.addClass('has-error');
+                    $group.find('.help-block').html(error).removeClass('hidden');
+                }
+            });
+
+            var bindClass = Backbone.Model.extend({
+                defaults: {
+                    firstName: "Luke",
+                    lastName: "Skywalker"
+                },
+                validation: {
+                    firstName: {
+                        required: true
+                    },
+                    lastName: {
+                        equalTo: 'firstName'
+                    }
+                }
+            });
+
+            var bindModel = new bindClass();
 
             var BindingView = Backbone.Epoxy.View.extend({
                 el: "#app-luke",
                 bindings: {
-                    "input.first-name": "value:firstName,events:['keyup']",
-                    "input.last-name": "value:lastName,events:['keyup']",
-                    "span.first-name": "text:firstName",
-                    "span.last-name": "text:lastName"
-                }
+                    "input.firstName": "value:firstName,events:['keyup']",
+                    "input.lastName": "value:lastName,events:['keyup']",
+                    "span.firstName": "text:firstName",
+                    "span.lastName": "text:lastName"
+                },
+
+                initialize: function(){
+                    Backbone.Validation.bind(this);
+                },
+                setterOptions:{validate:true} // root cause
             });
 
             var view = new BindingView({model: bindModel});

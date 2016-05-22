@@ -11,7 +11,8 @@ requirejs.config({
         jquery: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min',
         underscore: 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min',
         backbone: 'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.0/backbone-min',
-        epoxy: 'https://raw.githubusercontent.com/gmac/backbone.epoxy/master/backbone.epoxy.min'
+        epoxy: 'https://raw.githubusercontent.com/gmac/backbone.epoxy/master/backbone.epoxy.min',
+        validation: 'https://raw.github.com/thedersen/backbone.validation/master/dist/backbone-validation-amd-min'
     },
     shim: {}
 });
