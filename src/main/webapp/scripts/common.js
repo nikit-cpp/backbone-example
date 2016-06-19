@@ -1,3 +1,4 @@
+MODE = 'dev';
 requirejs.config({
     //By default load any module IDs from js/lib
     baseUrl: 'scripts',
@@ -8,13 +9,13 @@ requirejs.config({
     //the paths config could be for a directory.
     paths: {
         text: '../libs/text/text',
-        jquery: '../libs/jquery/dist/jquery',
-        underscore: '../libs/underscore/underscore',
-        backbone: '../libs/backbone/backbone',
+        'jquery': MODE == 'min' ? '../libs/jquery/dist/jquery.min' : '../libs/jquery/dist/jquery',
+        underscore: MODE == 'min' ? '../libs/underscore/underscore-min' : '../libs/underscore/underscore',
+        backbone: MODE == 'min' ? '../libs/backbone/backbone-min' : '../libs/backbone/backbone',
         epoxy: '../libs/backbone.epoxy/backbone.epoxy',
-        validation: '../libs/backbone.validation/dist/backbone-validation-amd',
+        validation: MODE == 'min' ? '../libs/backbone.validation/dist/backbone-validation-amd-min' : '../libs/backbone.validation/dist/backbone-validation-amd',
         json2: '../libs/json2/json2',
-        marionette: '../libs/backbone.marionette/lib/backbone.marionette'
+        marionette: MODE == 'min' ? '../libs/backbone.marionette/lib/backbone.marionette.min' :'../libs/backbone.marionette/lib/backbone.marionette'
     },
     shim: {}
 });
