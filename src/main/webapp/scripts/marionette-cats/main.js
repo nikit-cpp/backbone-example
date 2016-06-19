@@ -1,32 +1,28 @@
 requirejs(['../common'], function (common) {
-    require(['jquery', 'backbone', 'underscore', 'marionette'],
-        function   ($, Backbone, _) {
-            MyApp = new Backbone.Marionette.Application();
+    require(['jquery', 'backbone', 'underscore', 'text!marionette-cats/AngryCatsView.html', 'text!marionette-cats/AngryCatView.html', 'marionette'],
+        function   ($, Backbone, _, AngryCatsViewHtml, AngryCatViewHtml) {
+            var MyApp = new Backbone.Marionette.Application();
 
             MyApp.addRegions({
                 mainRegion: "#content"
             });
 
-            AngryCat = Backbone.Model.extend({});
+            var AngryCat = Backbone.Model.extend({name: 'Default name'});
 
-            AngryCats = Backbone.Collection.extend({
+            var AngryCats = Backbone.Collection.extend({
                 model: AngryCat
             });
-            AngryCatView = Backbone.Marionette.ItemView.extend({
-                template: "#angry_cat-template",
+            var AngryCatView = Backbone.Marionette.ItemView.extend({
+                template: _.template(AngryCatViewHtml),
                 tagName: 'tr',
                 className: 'angry_cat'
             });
-            AngryCatsView = Backbone.Marionette.CompositeView.extend({
+            var AngryCatsView = Backbone.Marionette.CompositeView.extend({
                 tagName: "table",
                 id: "angry_cats",
                 className: "table-striped table-bordered",
-                template: "#angry_cats-template",
-                itemView: AngryCatView,
-
-                appendHtml: function(collectionView, itemView){
-                    collectionView.$("tbody").append(itemView.el);
-                }
+                template: _.template(AngryCatsViewHtml),
+                childView: AngryCatView
             });
             MyApp.addInitializer(function(options){
                 var angryCatsView = new AngryCatsView({
@@ -35,7 +31,7 @@ requirejs(['../common'], function (common) {
                 MyApp.mainRegion.show(angryCatsView);
             });
 
-            $(document).ready(function(){
+            //$(document).ready(function(){
                 var cats = new AngryCats([
                     { name: 'Wet Cat' },
                     { name: 'Bitey Cat' },
@@ -43,7 +39,7 @@ requirejs(['../common'], function (common) {
                 ]);
 
                 MyApp.start({cats: cats});
-            });
+            //});
         }
     );
 });
