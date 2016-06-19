@@ -12,7 +12,9 @@ requirejs.config({
         underscore: 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min',
         backbone: 'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.0/backbone-min',
         epoxy: 'https://raw.githubusercontent.com/gmac/backbone.epoxy/master/backbone.epoxy.min',
-        validation: 'https://raw.github.com/thedersen/backbone.validation/master/dist/backbone-validation-amd-min'
+        validation: 'https://raw.github.com/thedersen/backbone.validation/master/dist/backbone-validation-amd-min',
+        json2: 'http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2',
+        marionette: 'http://marionettejs.com/downloads/backbone.marionette.min'
     },
     shim: {}
 });
