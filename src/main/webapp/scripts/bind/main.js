@@ -5,6 +5,8 @@ requirejs(['../common'], function (common) {
                 forceUpdate: true
             });
 
+            // globally set validation callback
+            /*
             _.extend(Backbone.Validation.callbacks, {
                 valid: function (view, attr, selector) {
                     var $el = view.$('[name=' + attr + ']'),
@@ -21,6 +23,7 @@ requirejs(['../common'], function (common) {
                     $group.find('.help-block').html(error).removeClass('hidden');
                 }
             });
+            */
 
             var bindClass = Backbone.Model.extend({
                 defaults: {
@@ -51,10 +54,31 @@ requirejs(['../common'], function (common) {
                 initialize: function(){
                     Backbone.Validation.bind(this);
                 },
+
+                render: function(){
+                    // set validation per view
+                    Backbone.Validation.bind(this, {
+                        valid: function(view, attr) {
+                            var $el = view.$('[name=' + attr + ']'),
+                                $group = $el.closest('.form-group');
+
+                            $group.removeClass('has-error');
+                            $group.find('.help-block').html('').addClass('hidden');
+                        },
+                        invalid: function(view, attr, error) {
+                            var $el = view.$('[name=' + attr + ']'),
+                                $group = $el.closest('.form-group');
+
+                            $group.addClass('has-error');
+                            $group.find('.help-block').html(error).removeClass('hidden');
+                        }
+                    });
+                },
                 setterOptions:{validate:true} // root cause
             });
 
             var view = new BindingView({model: bindModel});
+            view.render();
         }
     );
 });
