@@ -52,10 +52,6 @@ requirejs(['../common'], function (common) {
                 },
 
                 initialize: function(){
-                    Backbone.Validation.bind(this);
-                },
-
-                render: function(){
                     // set validation per view
                     Backbone.Validation.bind(this, {
                         valid: function(view, attr) {
@@ -74,11 +70,11 @@ requirejs(['../common'], function (common) {
                         }
                     });
                 },
-                setterOptions:{validate:true} // root cause: force validation on setting
+
+                setterOptions: {validate: true} // root cause: force validation on setting
             });
 
             var view = new BindingView({model: bindModel});
-            view.render();
         }
     );
 });
