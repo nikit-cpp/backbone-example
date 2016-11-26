@@ -45,8 +45,8 @@ requirejs(['../common'], function (common) {
             var BindingView = Backbone.Epoxy.View.extend({
                 el: "#app-luke",
                 bindings: {
-                    "input.firstName": "value:firstName,events:['keyup']",
-                    "input.lastName": "value:lastName,events:['keyup']",
+                    "[name=firstName]": "value:firstName,events:['keyup']",
+                    "[name=lastName]": "value:lastName,events:['keyup']",
                     "span.firstName": "text:firstName",
                     "span.lastName": "text:lastName"
                 },
