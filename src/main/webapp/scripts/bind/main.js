@@ -74,7 +74,7 @@ requirejs(['../common'], function (common) {
                         }
                     });
                 },
-                setterOptions:{validate:true} // root cause
+                setterOptions:{validate:true} // root cause: force validation on setting
             });
 
             var view = new BindingView({model: bindModel});
