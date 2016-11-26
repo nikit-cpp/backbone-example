@@ -1,6 +1,7 @@
 requirejs(['../common'], function (common) {
     require(['jquery', 'backbone', 'underscore', 'epoxy', 'validation'],
         function   ($, Backbone, _) {
+            // allow to set invalid values in model
             Backbone.Validation.configure({
                 forceUpdate: true
             });
