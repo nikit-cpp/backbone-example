@@ -29,7 +29,8 @@ requirejs(['../common'], function (common) {
             var bindClass = Backbone.Model.extend({
                 defaults: {
                     firstName: "Luke",
-                    lastName: "Skywalker"
+                    lastName: "Skywalker",
+                    sex: 1
                 },
                 validation: {
                     firstName: {
@@ -45,12 +46,12 @@ requirejs(['../common'], function (common) {
 
             var BindingView = Backbone.Epoxy.View.extend({
                 el: "#app-luke",
-                bindings: {
+                bindings: /*{
                     "[name=firstName]": "value:firstName,events:['keyup']",
                     "[name=lastName]": "value:lastName,events:['keyup']",
                     "span.firstName": "text:firstName",
                     "span.lastName": "text:lastName"
-                },
+                }*/"data-bind",
 
                 initialize: function(){
                     // set validation per view
