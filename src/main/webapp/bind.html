@@ -3,8 +3,23 @@
 <html>
 <head>
 <title>Первая программа</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script data-main="scripts/bind/main" src="libs/requirejs/require.js"></script>
+	<style type="text/css">
+		/**
+		https://davidwalsh.name/css-content-attr
+		http://stackoverflow.com/questions/4574912/css-content-generation-before-or-after-input-elements/23383199#23383199
+		*/
+		body {
+			font-size: 120%; /* Размер шрифта */
+			font-family: Verdana, Arial, Helvetica, sans-serif; /* Семейство шрифта */
+			color: #336; /* Цвет текста */
+		}
+		input[data-error] + span:after {
+			content: "Ошибка: " attr(data-error); /* no quotes around attribute name! */
+			color: red;
+		}
+	</style>
 </head>
 <body>
 
@@ -13,13 +28,13 @@
 	<div class="form-group">
 		<label>First:</label>
 		<input type="text" name="firstName" data-bind="value:firstName,events:['keyup']">
-		<span class="help-block hidden"></span>
+		<span></span>
 	</div>
 
 	<div class="form-group">
 		<label>Last:</label>
 		<input type="text" name="lastName" data-bind="value:lastName,events:['keyup']">
-		<span class="help-block hidden"></span>
+		<span></span>
 	</div>
 
 	<div class="form-group">

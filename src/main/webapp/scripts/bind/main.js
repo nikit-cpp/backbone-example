@@ -55,7 +55,7 @@ requirejs(['../common'], function (common) {
 
                 initialize: function(){
                     // set validation per view
-                    Backbone.Validation.bind(this, {
+                    Backbone.Validation.bind(this/*, {
                         valid: function(view, attr) {
                             var $el = view.$('[name=' + attr + ']'),
                                 $group = $el.closest('.form-group');
@@ -70,7 +70,7 @@ requirejs(['../common'], function (common) {
                             $group.addClass('has-error');
                             $group.find('.help-block').html(error).removeClass('hidden');
                         }
-                    });
+                    }*/);
                 },
 
                 setterOptions: {validate: true} // root cause: force validation on setting
