@@ -30,7 +30,8 @@ requirejs(['../common'], function (common) {
                 defaults: {
                     firstName: "Luke",
                     lastName: "Skywalker",
-                    sex: 1
+                    sex: 1,
+                    starship: [3]
                 },
                 validation: {
                     firstName: {
