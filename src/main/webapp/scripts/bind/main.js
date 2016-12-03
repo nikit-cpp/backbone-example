@@ -78,6 +78,47 @@ requirejs(['../common'], function (common) {
             });
 
             var view = new BindingView({model: bindModel});
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var ListItemView = Backbone.View.extend({
+                //tagName: "select",
+                initialize: function() {
+                    var html =  "<option value='" + this.model.get("heroId") + "'>" +  this.model.get("label")+ "</option>" ;
+                    this.setElement(html);
+                }
+            });
+
+            var ListCollection = Backbone.Collection.extend({
+                model: Backbone.Model
+            });
+
+            var ListView = Backbone.Epoxy.View.extend({
+                el: "#bind-collection",
+                itemView: ListItemView,
+                model: Backbone.Model, // для того чтобы положить сюда выбранное значение
+
+                initialize: function() {
+                    var arr = [{label: "Luke Skywalker", heroId: 1}, {label: "Han Solo", heroId: 2}];
+
+                    this.collection = new ListCollection();
+                    this.collection.reset(arr);
+
+                    this.model = new Backbone.Model({selectedHero: 1});
+                }
+            });
+
+            var view = new ListView();
         }
     );
 });
