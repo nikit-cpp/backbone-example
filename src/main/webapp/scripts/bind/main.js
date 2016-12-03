@@ -95,7 +95,7 @@ requirejs(['../common'], function (common) {
                 //tagName: "select",
                 initialize: function() {
                     var html =  "<option value='" + this.model.get("heroId") + "'>" +  this.model.get("label")+ "</option>" ;
-                    this.setElement(html);
+                    this.setElement(html); // http://stackoverflow.com/questions/7894253/backbone-js-turning-off-wrap-by-div-in-render/7894410#7894410
                 }
             });
 
