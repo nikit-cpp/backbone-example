@@ -104,7 +104,10 @@ requirejs(['../common'], function (common) {
                 }
             ];
 
-            _.each(searchCriteria, function(selectItem, index){
+            _.each(searchCriteria, function(
+                selectItem, // элемент списка, объект, содержащий selectedHero и options
+                index
+            ){
                 $('#input-elements').append(
                     "<div id='select-item-"+index+"'>"+
                         "<select data-bind=\"collection:$collection,value:selectedHero,events:['change']\"></select>"+
@@ -128,9 +131,18 @@ requirejs(['../common'], function (common) {
                         this.collection.reset(selectItem.options);
 
                         this.model = new Backbone.Model(selectItem); // для того чтобы положить сюда выбранное значение
+                        this.model.on('change', function(model){
+                            selectItem.selectedHero = model.get('selectedHero'); // обновляем в первоначальном объекте
+                            //console.debug("model changed ", model);
+                        });
                     }
                 });
                 var view = new SelectView();
+
+                // для отладки
+                $( "#select-item-"+index ).change(function() {
+                    console.debug( "Handler for .change() called." + JSON.stringify(searchCriteria) );
+                });
             });
 
         }
