@@ -91,7 +91,7 @@ requirejs(['../common'], function (common) {
 
 
 
-            var ListItemView = Backbone.View.extend({
+            var OptionView = Backbone.View.extend({
                 //tagName: "select",
                 initialize: function() {
                     var html =  "<option value='" + this.model.get("heroId") + "'>" +  this.model.get("label")+ "</option>" ;
@@ -99,26 +99,26 @@ requirejs(['../common'], function (common) {
                 }
             });
 
-            var ListCollection = Backbone.Collection.extend({
+            var OptionCollection = Backbone.Collection.extend({
                 model: Backbone.Model
             });
 
-            var ListView = Backbone.Epoxy.View.extend({
+            var SelectView = Backbone.Epoxy.View.extend({
                 el: "#bind-collection",
-                itemView: ListItemView,
+                itemView: OptionView,
                 model: Backbone.Model, // для того чтобы положить сюда выбранное значение
 
                 initialize: function() {
-                    var arr = [{label: "Luke Skywalker", heroId: 1}, {label: "Han Solo", heroId: 2}];
+                    var obj = {selectedHero: 2, options: [{label: "Luke Skywalker", heroId: 1}, {label: "Han Solo", heroId: 2}]};
 
-                    this.collection = new ListCollection();
-                    this.collection.reset(arr);
+                    this.collection = new OptionCollection();
+                    this.collection.reset(obj.options);
 
-                    this.model = new Backbone.Model({selectedHero: 1});
+                    this.model = new Backbone.Model(obj);
                 }
             });
 
-            var view = new ListView();
+            var view = new SelectView();
         }
     );
 });
