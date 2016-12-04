@@ -89,32 +89,25 @@ requirejs(['../common'], function (common) {
 
 
 
-
+            var selectItem = {selectedHero: 2, options: [{label: "Luke Skywalker", heroId: 1}, {label: "Han Solo", heroId: 2}]};
 
             var OptionView = Backbone.View.extend({
-                //tagName: "select",
                 initialize: function() {
                     var html =  "<option value='" + this.model.get("heroId") + "'>" +  this.model.get("label")+ "</option>" ;
                     this.setElement(html); // http://stackoverflow.com/questions/7894253/backbone-js-turning-off-wrap-by-div-in-render/7894410#7894410
                 }
             });
 
-            var OptionCollection = Backbone.Collection.extend({
-                model: Backbone.Model
-            });
-
             var SelectView = Backbone.Epoxy.View.extend({
-                el: "#bind-collection",
+                el: "#select-item-1",
                 itemView: OptionView,
-                model: Backbone.Model, // для того чтобы положить сюда выбранное значение
+                model: Backbone.Model,
 
                 initialize: function() {
-                    var obj = {selectedHero: 2, options: [{label: "Luke Skywalker", heroId: 1}, {label: "Han Solo", heroId: 2}]};
+                    this.collection = new (Backbone.Collection.extend({ model: Backbone.Model })) ();
+                    this.collection.reset(selectItem.options);
 
-                    this.collection = new OptionCollection();
-                    this.collection.reset(obj.options);
-
-                    this.model = new Backbone.Model(obj);
+                    this.model = new Backbone.Model(selectItem); // для того чтобы положить сюда выбранное значение
                 }
             });
 
