@@ -86,32 +86,53 @@ requirejs(['../common'], function (common) {
 
 
 
-
-
-
-            var selectItem = {selectedHero: 2, options: [{label: "Luke Skywalker", heroId: 1}, {label: "Han Solo", heroId: 2}]};
-
-            var OptionView = Backbone.View.extend({
-                initialize: function() {
-                    var html =  "<option value='" + this.model.get("heroId") + "'>" +  this.model.get("label")+ "</option>" ;
-                    this.setElement(html); // http://stackoverflow.com/questions/7894253/backbone-js-turning-off-wrap-by-div-in-render/7894410#7894410
+            var searchCriteria = [
+                {
+                    selectedHero: 2,
+                    options: [
+                        {label: "Luke Skywalker", heroId: 1},
+                        {label: "Han Solo", heroId: 2}
+                    ]
+                },
+                {
+                    selectedHero: 1,
+                    options: [
+                        {label: "Dimmu Borgir", heroId: 1},
+                        {label: "Metallica", heroId: 2},
+                        {label: "Judas Priest", heroId: 3}
+                    ]
                 }
+            ];
+
+            _.each(searchCriteria, function(selectItem, index){
+                $('#input-elements').append(
+                    "<div id='select-item-"+index+"'>"+
+                        "<select data-bind=\"collection:$collection,value:selectedHero,events:['change']\"></select>"+
+                        "<span data-bind='text:selectedHero'></span>"+
+                    "</div>"
+                );
+
+                var OptionView = Backbone.View.extend({
+                    initialize: function() {
+                        var html =  "<option value='" + this.model.get("heroId") + "'>" +  this.model.get("label")+ "</option>" ;
+                        this.setElement(html); // http://stackoverflow.com/questions/7894253/backbone-js-turning-off-wrap-by-div-in-render/7894410#7894410
+                    }
+                });
+                var SelectView = Backbone.Epoxy.View.extend({
+                    el: "#select-item-"+index,
+                    itemView: OptionView,
+                    model: Backbone.Model,
+
+                    initialize: function() {
+                        this.collection = new (Backbone.Collection.extend({ model: Backbone.Model })) ();
+                        this.collection.reset(selectItem.options);
+
+                        this.model = new Backbone.Model(selectItem); // для того чтобы положить сюда выбранное значение
+                    }
+                });
+                var view = new SelectView();
             });
 
-            var SelectView = Backbone.Epoxy.View.extend({
-                el: "#select-item-1",
-                itemView: OptionView,
-                model: Backbone.Model,
-
-                initialize: function() {
-                    this.collection = new (Backbone.Collection.extend({ model: Backbone.Model })) ();
-                    this.collection.reset(selectItem.options);
-
-                    this.model = new Backbone.Model(selectItem); // для того чтобы положить сюда выбранное значение
-                }
-            });
-
-            var view = new SelectView();
         }
     );
 });
