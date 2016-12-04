@@ -115,6 +115,7 @@ requirejs(['../common'], function (common) {
                     "</div>"
                 );
 
+                // основано на примере отсюда http://epoxyjs.org/tutorials.html#binding-sources
                 var OptionView = Backbone.View.extend({
                     initialize: function() {
                         var html =  "<option value='" + this.model.get("heroId") + "'>" +  this.model.get("label")+ "</option>" ;
